@@ -15,7 +15,7 @@ CouchDBを試せるdocker環境
 コンテナを起動する
 
 ```bash
-docker-compose up -d coordinator 
+docker-compose up -d db
 ```
 
 Futonを開く
