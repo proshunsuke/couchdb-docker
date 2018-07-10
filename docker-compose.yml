@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: couchdb
+    ports:
+      - "5984:5984"
+    volumes:
+      - data:/opt/couchdb/data
+      - etc:/opt/couchdb/etc
+
+volumes:
+  data:
+    external: false
+  etc:
+    external: false
