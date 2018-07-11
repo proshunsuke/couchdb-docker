@@ -1,7 +1,7 @@
 version: "3"
 services:
   db:
-    image: couchdb
+    build: couchdb
     ports:
       - "5984:5984"
     volumes:
