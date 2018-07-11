@@ -12,15 +12,14 @@ RUN git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plu
 RUN echo 'export RBENV_ROOT="/usr/local/rbenv"' >> $HOME/.bashrc
 RUN echo 'export PATH="${RBENV_ROOT}/bin:${PATH}"' >> $HOME/.bashrc
 RUN echo 'eval "$(rbenv init -)"' >> $HOME/.bashrc
-RUN source $HOME/.bashrc
-RUN rbenv install ${ruby_ver}; rbenv global ${ruby_ver}
-RUN gem update --system; gem install --no-ri --no-rdoc libxml-ruby couchrest; gem install bundler
+RUN /bin/bash -c "source $HOME/.bashrc; rbenv install ${ruby_ver}; rbenv global ${ruby_ver}"
+RUN /bin/bash -c "source $HOME/.bashrc; gem update --system; gem install --no-ri --no-rdoc libxml-ruby couchrest"
 
 # nvmのインストール
 RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-RUN source $HOME/.bashrc && nvm install $node_ver && nvm alias default $node_ver && nvm use default
+RUN /bin/bash -c "source $HOME/.bashrc; nvm install $node_ver && nvm alias default $node_ver && nvm use default"
 
 RUN mkdir -p /work
-COPY scripts/* /work
+COPY scripts/* /work/
 
 WORKDIR /work
