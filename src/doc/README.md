@@ -187,3 +187,47 @@ curl http://localhost:5984/music/_design/albums/_view/by_name
 ```bash
 curl 'http://localhost:5984/music/_design/albums/_view/by_name?key="Help!"'
 ```
+
+### RubyでデータをCouchDBにインポート
+
+以下でcouchdbコンテナに入る
+
+```bash
+docker-compose exec db bash
+```
+
+以下でファイルをダウンロード
+
+```bash
+wget http://img.jamendo.com/data/dbdump_artistalbumtrack.xml.gz
+```
+
+以下を実行
+
+```bash
+zcat dbdump_artistalbumtrack.xml.gz | ruby import_from_jamendo.rb
+```
+
+以下を実行
+
+```bash
+curl http://localhost:5984/music/_design/artists/_view/by_name?limit=5
+```
+
+以下を実行
+
+```bash
+curl http://localhost:5984/music/_design/artists/_view/by_name?limit=5\&startkey=%22C%22
+```
+
+以下を実行
+
+```bash
+curl http://localhost:5984/music/_design/artists/_view/by_name?startkey=%22C%22\&endkey=%22D%22
+```
+
+以下を実行
+
+```bash
+curl http://localhost:5984/music/_design/artists/_view/by_name?startkey=%22D%22\&endkey=%22C%22\&descending=true
+```
